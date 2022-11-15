@@ -1,1 +1,2 @@
-export * from './AppRoutes';
+export * from './AppRouteEnum';
+export * from './ThemeEnum';

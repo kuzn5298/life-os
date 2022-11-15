@@ -1,4 +1,4 @@
-export enum AppRoutes {
+export enum AppRouteEnum {
     MAIN = '/',
 
     // Auth

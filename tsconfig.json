@@ -16,7 +16,10 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "baseUrl": "src",
-        "types": ["react/next", "react-dom/next"]
+        "types": ["react/next", "react-dom/next"],
+        "paths": {
+            "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+        }
     },
-    "include": ["src"]
+    "include": ["src", "craco.config.js"]
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRoutes, Navigate, RouteObject } from 'react-router-dom';
 
 import { AuthRouteObject } from 'types';
-import { AppRoutes } from 'constpack';
+import { AppRouteEnum } from 'constpack';
 
 import { useAuth } from './useAuth';
 
@@ -13,11 +13,11 @@ const getAuthElement = (
     isLoggedIn: boolean
 ): React.ReactNode => {
     if (forAuth) {
-        return !isLoggedIn ? <Navigate to={AppRoutes.LOGIN} /> : element;
+        return !isLoggedIn ? <Navigate to={AppRouteEnum.LOGIN} /> : element;
     }
 
     if (forGuest) {
-        return isLoggedIn ? <Navigate to={AppRoutes.MAIN} /> : element;
+        return isLoggedIn ? <Navigate to={AppRouteEnum.MAIN} /> : element;
     }
 
     return element;
