@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { useAuth, useTheme } from 'hooks';
+import { Spinner } from 'components';
 import { ThemeEnum } from 'constpack';
+import { useAuth, useTheme } from 'hooks';
 
 const MainLayout: React.FC = () => {
     const { setThemeByName } = useTheme();
@@ -20,7 +21,7 @@ const MainLayout: React.FC = () => {
             <button type="button" onClick={onSignOut}>
                 Sign Out
             </button>
-            <Suspense fallback={<div>loading ...</div>}>
+            <Suspense fallback={<Spinner fullContainer size="small" />}>
                 <Outlet />
             </Suspense>
         </div>

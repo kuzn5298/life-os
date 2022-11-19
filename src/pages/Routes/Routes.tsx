@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 
-import { AuthRouteObject } from 'types';
+import { Spinner } from 'components';
 import { useAuthRoutes } from 'hooks';
+import { AuthRouteObject } from 'types';
 
 export interface IRoutesProps {
     routes: AuthRouteObject[];
@@ -9,7 +10,7 @@ export interface IRoutesProps {
 
 const Routes: React.FC<IRoutesProps> = ({ routes = [] }) => {
     const elements = useAuthRoutes(routes);
-    return <Suspense fallback={<div>loading...</div>}>{elements}</Suspense>;
+    return <Suspense fallback={<Spinner fullScreen size="medium" />}>{elements}</Suspense>;
 };
 
 export default Routes;

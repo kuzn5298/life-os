@@ -1,3 +1,3 @@
-export * from '@mui/material';
-
 export * from './app';
+export * from './core';
+export * from './icons';
