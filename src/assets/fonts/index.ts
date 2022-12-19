@@ -15,14 +15,14 @@ const fonts = css`
 
     @font-face {
         font-family: 'Montserrat';
-        src: font_url(${MontserratRegular}) format('truetype');
+        src: url(${MontserratRegular}) format('truetype');
         font-weight: 400;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'Montserrat';
-        src: font_url(${MontserratMedium}) format('truetype');
+        src: url(${MontserratMedium}) format('truetype');
         font-weight: 500;
         font-style: normal;
     }

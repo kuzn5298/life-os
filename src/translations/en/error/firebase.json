@@ -1,0 +1,4 @@
+{
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/invalid-action-code": "The link is invalid. This can happen if the link is expired or has already been used."
+}

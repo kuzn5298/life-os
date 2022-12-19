@@ -3,6 +3,7 @@ export enum AppRouteEnum {
 
     // Auth
     LOGIN = '/login',
+    VERIFICATION = '/verification',
 
     // Errors
     NOT_FOUND = '/404',

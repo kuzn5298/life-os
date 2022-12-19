@@ -1,6 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
 const animate = keyframes`
+    0% {
+        transform: rotate(0deg);
+    }
     100% {
         transform: rotate(360deg);
     }
@@ -28,24 +31,56 @@ const SpinnerContainer = styled.span`
         align-items: center;
     }
 
-    .spinner {
-        animation: ${animate} 2.5s linear infinite, 1 !important;
-    }
+    .loader {
+        border: 0.25rem solid;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: ${animate} 1s linear infinite;
 
-    .small {
-        font-size: 2rem;
-    }
+        &.primary {
+            border-color: ${({ theme }) => theme.palette.primary.main};
+            border-bottom-color: transparent;
+        }
 
-    .medium {
-        font-size: 4rem;
-    }
+        &.secondary {
+            border-color: ${({ theme }) => theme.palette.secondary.main};
+            border-bottom-color: transparent;
+        }
 
-    .large {
-        font-size: 6rem;
-    }
+        &.appContrast {
+            border-color: ${({ theme }) =>
+                theme.palette.getContrastText(theme.palette.background.app)};
+            border-bottom-color: transparent;
+        }
 
-    .inherit {
-        font-size: inherit;
+        &.paperContrast {
+            border-color: ${({ theme }) =>
+                theme.palette.getContrastText(theme.palette.background.paper)};
+            border-bottom-color: transparent;
+        }
+
+        &.backdropContrast {
+            border-color: ${({ theme }) =>
+                theme.palette.getContrastText(theme.palette.background.backdrop)};
+            border-bottom-color: transparent;
+        }
+
+        &.small {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        &.medium {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        &.large {
+            width: 4rem;
+            height: 4rem;
+        }
     }
 `;
 

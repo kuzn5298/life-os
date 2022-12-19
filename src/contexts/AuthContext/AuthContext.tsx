@@ -1,9 +1,12 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
+
+import { Spinner } from 'components';
+import { authService } from 'services';
+import { UserAuthInformation } from 'types';
 
 export interface IAuthContext {
     isLoggedIn: boolean;
-    onLogin: () => void;
-    onLogout: () => void;
+    user: UserAuthInformation | null;
 }
 
 export interface IAuthProviderProps {
@@ -13,24 +16,30 @@ export interface IAuthProviderProps {
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState<UserAuthInformation | null>(null);
 
-    const onLogin = useCallback(() => {
-        setIsLoggedIn(true);
-    }, []);
-
-    const onLogout = useCallback(() => {
-        setIsLoggedIn(false);
+    useEffect(() => {
+        const unsubscribe = authService.authStateChangeSubscription((userInformation) => {
+            setUser(userInformation);
+            setLoading(false);
+        });
+        return () => {
+            unsubscribe?.();
+        };
     }, []);
 
     const contextValue = useMemo(
         () => ({
-            isLoggedIn,
-            onLogin,
-            onLogout,
+            isLoggedIn: !!user,
+            user,
         }),
-        [isLoggedIn, onLogin, onLogout]
+        [user]
     );
+
+    if (loading) {
+        return <Spinner fullContainer color="appContrast" />;
+    }
 
     return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };

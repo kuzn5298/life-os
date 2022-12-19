@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { TFunction } from 'i18next';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, UseTranslationOptions } from 'react-i18next';
 
 import { LanguageEnum } from 'constpack';
 
@@ -10,8 +10,12 @@ export interface IUseLanguage {
     changeLanguage: (lng: LanguageEnum) => void;
 }
 
-export const useLanguage = (ns?: string | string[]): IUseLanguage => {
-    const { t, i18n } = useTranslation(ns);
+export const useLanguage = (
+    ns?: string | string[],
+    options?: UseTranslationOptions<string | undefined>
+): IUseLanguage => {
+    const { t, i18n } = useTranslation(ns, options);
+
     const language = useMemo(() => i18n.language, [i18n.language]);
 
     const changeLanguage = (lng: LanguageEnum): void => {

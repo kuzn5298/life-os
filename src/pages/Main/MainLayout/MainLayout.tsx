@@ -1,46 +1,25 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Spinner } from 'components';
-import { LanguageEnum, ThemeEnum } from 'constpack';
-import { useAuth, useTheme, useLanguage } from 'hooks';
+import { Button, LanguageToggle, Paper, Spinner, ThemeToggle } from 'components';
+import { authService } from 'services';
+import MainLayoutContainer from './MainLayout.styled';
 
-const MainLayout: React.FC = () => {
-    const { setThemeByName } = useTheme();
-    const { onSignOut } = useAuth();
-    const { t, language, changeLanguage } = useLanguage();
-
-    return (
-        <div>
-            <div>Main</div>
-            <div>
-                <button type="button" onClick={onSignOut}>
-                    {t('auth.signOut')}
-                </button>
-            </div>
-            <div>
-                <button type="button" onClick={() => setThemeByName(ThemeEnum.LIGHT)}>
-                    light
-                </button>
-                <button type="button" onClick={() => setThemeByName(ThemeEnum.DARK)}>
-                    dark
-                </button>
-            </div>
-            <div>
-                <div>{language}</div>
-                <button type="button" onClick={() => changeLanguage(LanguageEnum.RUSSIAN)}>
-                    ru
-                </button>
-                <button type="button" onClick={() => changeLanguage(LanguageEnum.ENGLISH)}>
-                    en
-                </button>
-            </div>
-
-            <Suspense fallback={<Spinner fullContainer size="small" />}>
+const MainLayout: React.FC = () => (
+    <MainLayoutContainer>
+        <div className="header">
+            <ThemeToggle />
+            <LanguageToggle />
+            <Button onClick={authService.signOut} variant="contained" color="secondary">
+                Sing Out
+            </Button>
+        </div>
+        <Paper className="body">
+            <Suspense fallback={<Spinner fullContainer color="paperContrast" />}>
                 <Outlet />
             </Suspense>
-        </div>
-    );
-};
+        </Paper>
+    </MainLayoutContainer>
+);
 
 export default MainLayout;

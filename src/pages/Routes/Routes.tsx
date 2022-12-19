@@ -10,7 +10,7 @@ export interface IRoutesProps {
 
 const Routes: React.FC<IRoutesProps> = ({ routes = [] }) => {
     const elements = useAuthRoutes(routes);
-    return <Suspense fallback={<Spinner fullScreen size="medium" />}>{elements}</Suspense>;
+    return <Suspense fallback={<Spinner fullScreen color="appContrast" />}>{elements}</Suspense>;
 };
 
 export default Routes;

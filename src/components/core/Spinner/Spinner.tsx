@@ -1,22 +1,23 @@
 import React from 'react';
 import clsx from 'clsx';
-import { SpinnerIcon } from 'components';
 
 import SpinnerContainer from './Spinner.styled';
 
-interface SpinnerProps {
+type SpinnerProps = {
     fullScreen?: boolean;
     fullContainer?: boolean;
-    size?: 'small' | 'medium' | 'large' | 'inherit';
-}
+    color?: 'primary' | 'secondary' | 'appContrast' | 'paperContrast' | 'backdropContrast';
+    size?: 'small' | 'medium' | 'large';
+};
 
 const Spinner: React.FC<SpinnerProps> = ({
     fullScreen = false,
     fullContainer = false,
-    size = 'inherit',
+    color = 'primary',
+    size = 'medium',
 }) => (
     <SpinnerContainer className={clsx({ fullScreen, fullContainer })}>
-        <SpinnerIcon className={clsx('spinner', size)} />
+        <span className={clsx('loader', size, color)} />
     </SpinnerContainer>
 );
 
