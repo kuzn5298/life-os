@@ -1,5 +1,6 @@
 import { ThemeOptions } from 'components';
 import { THEME_LOCAL_STORAGE, ThemeEnum, DEFAULT_THEME_NAME } from 'constpack';
+import { storage } from 'libs/storage';
 import { DARK_THEME, LIGHT_THEME } from './configs';
 
 const THEMES = {
@@ -8,11 +9,11 @@ const THEMES = {
 };
 
 export const setThemeNameToLocalStorages = (themeName: ThemeEnum): void => {
-    localStorage.setItem(THEME_LOCAL_STORAGE, themeName);
+    storage.set(THEME_LOCAL_STORAGE, themeName);
 };
 
 export const getThemeNameFromLocalStorages = (): ThemeEnum | null =>
-    localStorage.getItem(THEME_LOCAL_STORAGE) as ThemeEnum | null;
+    storage.get(THEME_LOCAL_STORAGE) as ThemeEnum | null;
 
 export const getSystemTheme = (): ThemeEnum | null => {
     const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)')?.matches;

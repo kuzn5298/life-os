@@ -5,14 +5,13 @@ import {
     signOut as firebaseSignOut,
     isSignInWithEmailLink as firebaseIsSignInWithEmailLink,
     onAuthStateChanged as firebaseOnAuthStateChanged,
-    UserCredential,
     Unsubscribe,
     User as FirebaseUser,
 } from 'firebase/auth';
 
 import { ProviderEnum } from 'constpack';
 import { userService } from 'services';
-import { UserAuthInformation } from 'types';
+import { BaseUserInfo, UserAuthInformation } from 'types';
 import { auth, googleProvider, actionCodeConfig } from 'libs/firebase';
 
 // email
@@ -20,14 +19,19 @@ export const isSignInWithEmailLink = (): boolean =>
     firebaseIsSignInWithEmailLink(auth, window.location.href);
 export const sendSignInLinkToEmail = (email: string): Promise<void> =>
     firebaseSendSignInLinkToEmail(auth, email, actionCodeConfig);
-export const signInByEmailLink = (email: string): Promise<UserCredential> =>
-    firebaseSignInWithEmailLink(auth, email, window.location.href);
+export const signInByEmailLink = async (email: string): Promise<BaseUserInfo> => {
+    const { user } = await firebaseSignInWithEmailLink(auth, email, window.location.href);
+    return userService.parseBasicUserInfo(user);
+};
 
 // providers
-const signInByGoogle = (): Promise<UserCredential> => firebaseSignInWithPopup(auth, googleProvider);
+const signInByGoogle = async (): Promise<BaseUserInfo> => {
+    const { user } = await firebaseSignInWithPopup(auth, googleProvider);
+    return userService.parseBasicUserInfo(user);
+};
 
 // general
-export const signInByProvider = (provider: ProviderEnum): Promise<UserCredential> => {
+export const signInByProvider = async (provider: ProviderEnum): Promise<BaseUserInfo> => {
     switch (provider) {
         case ProviderEnum.GOOGLE:
             return signInByGoogle();
@@ -43,7 +47,7 @@ export const authStateChangeSubscription = (
     const unsubscribe = firebaseOnAuthStateChanged(
         auth,
         async (user: FirebaseUser | null): Promise<void> => {
-            const baseUserInformation = userService.parseBasicUserInfo(user);
+            const baseUserInformation = user && userService.parseBasicUserInfo(user);
             callback(baseUserInformation);
         }
     );

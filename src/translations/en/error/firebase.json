@@ -1,4 +1,9 @@
 {
     "auth/invalid-email": "Please enter a valid email address.",
-    "auth/invalid-action-code": "The link is invalid. This can happen if the link is expired or has already been used."
+    "auth/invalid-action-code": "The link is invalid. This can happen if the link is expired or has already been used.",
+    "auth/user-disabled": "The user account has been disabled by an administrator.",
+    "auth/internal-error": "An internal error has occurred.",
+    "auth/network-request-failed": "A network error (such as timeout, interrupted connection or unreachable host) has occurred.",
+    "auth/quota-exceeded": "The project's quota for this operation has been exceeded.",
+    "auth/popup-closed-by-user": "The popup has been closed."
 }

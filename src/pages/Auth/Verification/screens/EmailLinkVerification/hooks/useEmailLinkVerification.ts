@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FirebaseError } from 'firebase/app';
 
-import { AppRouteEnum } from 'constpack';
+import { AppRouteEnum, SIGN_IN_EMAIL_LOCAL_STORAGE } from 'constpack';
 import { authService } from 'services';
+import { storage } from 'libs/storage';
+import { getFirebaseCodeError } from 'libs/firebase';
 
 type UseEmailLinkVerification = {
     loading: boolean;
@@ -26,12 +27,11 @@ export const useEmailLinkVerification = (): UseEmailLinkVerification => {
         try {
             setLoading(true);
             await authService.signInByEmailLink(email);
-        } catch (e: unknown) {
-            const name = (e as FirebaseError)?.name;
-            if (name === 'FirebaseError') {
-                const code = (e as FirebaseError)?.code;
-                const errorMessage = code;
-                setServerEmailError(errorMessage);
+            storage.remove(SIGN_IN_EMAIL_LOCAL_STORAGE);
+        } catch (e) {
+            const code = getFirebaseCodeError(e);
+            if (code) {
+                setServerEmailError(code);
             }
         } finally {
             setLoading(false);
@@ -40,7 +40,7 @@ export const useEmailLinkVerification = (): UseEmailLinkVerification => {
 
     useEffect(() => {
         if (authService.isSignInWithEmailLink()) {
-            const email = '';
+            const email = storage.get(SIGN_IN_EMAIL_LOCAL_STORAGE);
             if (email) {
                 signInByEmail(email);
             } else {

@@ -17,6 +17,14 @@ const Login: React.FC = () => {
     const { t } = useLanguage();
     const { signInByProvider, openEmailProvider, closeEmailProvider, isEmailProvider } = useLogin();
 
+    const handleClick = (provider: ProviderEnum): void => {
+        if (provider === ProviderEnum.EMAIL) {
+            openEmailProvider();
+        } else {
+            signInByProvider(provider);
+        }
+    };
+
     return (
         <>
             <LoginContainer>
@@ -34,13 +42,7 @@ const Login: React.FC = () => {
                                 fullWidth
                                 disableElevation
                                 startIcon={ICON[provider]}
-                                onClick={() => {
-                                    if (provider === ProviderEnum.EMAIL) {
-                                        openEmailProvider();
-                                    } else {
-                                        signInByProvider(provider);
-                                    }
-                                }}
+                                onClick={() => handleClick(provider)}
                                 sx={{
                                     backgroundColor: (theme) => theme.palette.social[provider],
                                     ':hover': {

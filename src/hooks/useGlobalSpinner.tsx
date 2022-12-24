@@ -29,7 +29,7 @@ export const useGlobalSpinner = (loading = false): UseGlobalSpinner => {
     );
 
     const asyncWithSpinner = useCallback(
-        async (asyncFunc: () => Promise<unknown> | Error) => {
+        async <T = unknown,>(asyncFunc: () => Promise<T> | Error): Promise<T | Error> => {
             try {
                 showSpinner();
                 return await asyncFunc();

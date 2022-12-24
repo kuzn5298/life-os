@@ -1,4 +1,5 @@
 import { InitOptions, LanguageDetectorModule, Services } from 'i18next';
+import { storage } from 'libs/storage';
 
 const LOCAL_STORAGE_NAME = 'lng';
 
@@ -23,7 +24,7 @@ class LanguageDetector implements LanguageDetectorModule {
     }
 
     detect(): string | readonly string[] | undefined {
-        const localLanguage = localStorage.getItem(this.localStorageName);
+        const localLanguage = storage.get(this.localStorageName);
         const systemLanguage = navigator.language.split('-')[0];
         const language = localLanguage ?? systemLanguage;
 
@@ -35,7 +36,7 @@ class LanguageDetector implements LanguageDetectorModule {
     }
 
     cacheUserLanguage(lng: string): void {
-        localStorage.setItem(this.localStorageName, lng);
+        storage.set(this.localStorageName, lng);
     }
 }
 
