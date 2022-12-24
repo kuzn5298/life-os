@@ -1,12 +1,13 @@
 /// <reference lib="webworker" />
 /* eslint-disable no-restricted-globals */
 
-import { clientsClaim } from 'workbox-core';
+import { skipWaiting, clientsClaim } from 'workbox-core';
 import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 
 declare const self: ServiceWorkerGlobalScope;
 
+skipWaiting();
 clientsClaim();
 
 // eslint-disable-next-line no-underscore-dangle

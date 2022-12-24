@@ -3,10 +3,14 @@
   "name": "Life OS",
   "icons": [
     {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
       "src": "favicon.svg",
-      "sizes": "16x16 24x24 32x32 48x48 64x64 72x72 96x96 128x128 256x256 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ],
   "start_url": ".",
