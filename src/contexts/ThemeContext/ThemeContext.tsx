@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback, useMemo } from 'react';
+import React, { createContext, useState, useCallback, useMemo, useLayoutEffect } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import { CssBaseline, createTheme, Theme } from 'components';
@@ -26,6 +26,12 @@ export const ThemeProvider: React.FC<IThemeProviderProps> = ({ children }) => {
         const themeConfig = getThemeByName(themeName);
         return createTheme(themeConfig);
     }, [themeName]);
+
+    useLayoutEffect(() => {
+        document
+            .querySelector("meta[name='theme-color']")
+            ?.setAttribute('content', theme.palette.background.app);
+    }, [theme]);
 
     const setThemeByName = useCallback((newThemeName: ThemeEnum): void => {
         if (isValidThemeName(newThemeName)) {
