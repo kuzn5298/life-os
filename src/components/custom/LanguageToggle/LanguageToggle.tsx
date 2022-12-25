@@ -35,6 +35,7 @@ const LanguageToggle: React.FC = () => {
                 onClick={handleClick}
                 disableElevation
                 endIcon={<KeyboardArrowDownIcon />}
+                aria-label="Change language"
             >
                 {t(`${language}.code`)}
             </Button>

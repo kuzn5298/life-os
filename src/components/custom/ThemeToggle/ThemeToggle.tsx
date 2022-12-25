@@ -24,6 +24,7 @@ const ThemeToggle: React.FC = () => {
             color="secondary"
             disableElevation
             onClick={() => setThemeByName(TOGGLE[themeName])}
+            aria-label="Change theme"
         >
             {ICON[themeName]}
         </Button>
