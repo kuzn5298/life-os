@@ -11,10 +11,8 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         & #root {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
         }
     }

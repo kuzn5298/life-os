@@ -11,6 +11,7 @@ const fonts = css`
         src: url(${MontserratLight}) format('truetype');
         font-weight: 300;
         font-style: normal;
+        font-display: swap;
     }
 
     @font-face {
@@ -18,6 +19,7 @@ const fonts = css`
         src: url(${MontserratRegular}) format('truetype');
         font-weight: 400;
         font-style: normal;
+        font-display: swap;
     }
 
     @font-face {
@@ -25,6 +27,7 @@ const fonts = css`
         src: url(${MontserratMedium}) format('truetype');
         font-weight: 500;
         font-style: normal;
+        font-display: swap;
     }
 
     @font-face {
@@ -32,6 +35,7 @@ const fonts = css`
         src: url(${MontserratBold}) format('truetype');
         font-weight: 700;
         font-style: normal;
+        font-display: swap;
     }
 `;
 
